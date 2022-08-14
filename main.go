@@ -16,14 +16,14 @@ func main() {
 		Usage: "prints images' information",
 		Action: func(cCtx *cli.Context) error {
 			// args
-			path := "./"
+			dir := "./"
 			if cCtx.NArg() == 1 {
-				path = cCtx.Args().Get(0)
+				dir = cCtx.Args().Get(0)
 			} else if cCtx.NArg() >= 2 {
 				return fmt.Errorf(fmt.Sprintf("Expected 0-1 arguments, but got %v", cCtx.NArg()))
 			}
 			// scan
-			scanResult, err := internal.Scan(path)
+			scanResult, err := internal.Scan(dir)
 			if err != nil {
 				return err
 			}

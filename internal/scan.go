@@ -16,7 +16,7 @@ import (
 )
 
 type ScanResult struct {
-	Path   string
+	Dir    string
 	Images []*ImageInfo
 }
 
@@ -31,15 +31,15 @@ func isImageFileName(fileName string) bool {
 	return reg.Match([]byte(fileName))
 }
 
-func Scan(path string) (*ScanResult, error) {
-	path, err := filepath.Abs(path)
+func Scan(dir string) (*ScanResult, error) {
+	dir, err := filepath.Abs(dir)
 	if err != nil {
 		return nil, err
 	}
 
 	images := []*ImageInfo{}
 
-	fileInfoList, err := ioutil.ReadDir(path)
+	fileInfoList, err := ioutil.ReadDir(dir)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ func Scan(path string) (*ScanResult, error) {
 		}
 
 		imageName := fileInfo.Name()
-		imageFilePath := filepath.Join(path, imageName)
+		imageFilePath := filepath.Join(dir, imageName)
 		imageFile, err := os.OpenFile(imageFilePath, os.O_RDONLY, fileInfo.Mode().Perm())
 		if err != nil {
 			return nil, err
@@ -72,7 +72,7 @@ func Scan(path string) (*ScanResult, error) {
 	}
 
 	res := &ScanResult{
-		Path:   path,
+		Dir:    dir,
 		Images: images,
 	}
 
