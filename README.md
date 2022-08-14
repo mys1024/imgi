@@ -11,22 +11,20 @@ imgi [DIR] # default DIR is "./"
 **imgi** prints images' information in **YAML** format:
 
 ```txt
+dir: /root
 images:
   - name: 1.jpg
     width: 2160
     height: 2880
-  - name: 2.jpg
+  - name: 2.png
     width: 2160
     height: 2880
-  - name: 3.jpg
-    width: 2160
-    height: 2880
-  - name: 4.jpg
+  - name: 3.webp
     width: 2160
     height: 2880
 ```
 
-## Support image
+## Supported image formats
 
 - JPEG (.jpg, .jpeg)
 
@@ -35,3 +33,9 @@ images:
 - WEBP (.webp)
 
 - GIF (.gif)
+
+## Install from source code
+
+```bash
+go install github.com/mys1024/imgi@latest
+```
