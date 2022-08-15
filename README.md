@@ -5,8 +5,10 @@ A CLI tool that prints images' information.
 ## Usage
 
 ```bash
-imgi [DIR] # default DIR is "./"
+imgi [DIR]
 ```
+
+`DIR`: Directory containing image files (default: "./")
 
 **imgi** prints images' information in **YAML** format:
 
