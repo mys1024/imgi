@@ -18,7 +18,7 @@ func main() {
 			&cli.StringFlag{
 				Name:    "format",
 				Value:   "yaml",
-				Usage:   "output format",
+				Usage:   "output format, available value: \"yaml\", \"toml\", \"json\"",
 				Aliases: []string{"f"},
 			},
 		},

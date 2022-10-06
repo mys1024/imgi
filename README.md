@@ -26,6 +26,10 @@ images:
     height: 2880
 ```
 
+## Flags
+
+- --format, -f: output format, available value: "yaml", "toml", "json" (default: "yaml")
+
 ## Supported image formats
 
 - JPEG (.jpg, .jpeg)
