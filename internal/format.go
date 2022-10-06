@@ -2,9 +2,12 @@ package internal
 
 import (
 	"bytes"
+	"encoding/json"
 
 	"gopkg.in/yaml.v3"
 )
+
+type Formatter func(scanResult *ScanResult) (string, error)
 
 func Yaml(scanResult *ScanResult) (string, error) {
 	buffer := bytes.NewBuffer([]byte{})
@@ -15,5 +18,16 @@ func Yaml(scanResult *ScanResult) (string, error) {
 		return "", err
 	}
 	encoder.Close()
+	return buffer.String(), nil
+}
+
+func Json(scanResult *ScanResult) (string, error) {
+	buffer := bytes.NewBuffer([]byte{})
+	encoder := json.NewEncoder(buffer)
+	encoder.SetIndent("", "  ")
+	err := encoder.Encode(scanResult)
+	if err != nil {
+		return "", err
+	}
 	return buffer.String(), nil
 }

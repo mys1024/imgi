@@ -14,7 +14,26 @@ func main() {
 	app := &cli.App{
 		Name:  "imgi",
 		Usage: "prints images' information",
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:    "format",
+				Value:   "yaml",
+				Usage:   "output format",
+				Aliases: []string{"f"},
+			},
+		},
 		Action: func(cCtx *cli.Context) error {
+			// flags
+			format := cCtx.String("format")
+			formatter := internal.Yaml
+			switch format {
+			case "yaml":
+				formatter = internal.Yaml
+			case "json":
+				formatter = internal.Json
+			default:
+				return fmt.Errorf(fmt.Sprintf("Wrong flag (format) value: %v", format))
+			}
 			// args
 			dir := "./"
 			if cCtx.NArg() == 1 {
@@ -27,12 +46,12 @@ func main() {
 			if err != nil {
 				return err
 			}
-			// print scan result in YAML
-			yaml, err := internal.Yaml(scanResult)
+			// output
+			output, err := formatter(scanResult)
 			if err != nil {
 				return err
 			}
-			fmt.Println(yaml)
+			fmt.Println(output)
 			return nil
 		},
 	}
