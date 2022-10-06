@@ -3,7 +3,6 @@ package internal
 import (
 	"bufio"
 	"image"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -39,7 +38,7 @@ func Scan(dir string) (*ScanResult, error) {
 
 	images := []*ImageInfo{}
 
-	fileInfoList, err := ioutil.ReadDir(dir)
+	fileInfoList, err := os.ReadDir(dir)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +53,7 @@ func Scan(dir string) (*ScanResult, error) {
 
 		imageName := fileInfo.Name()
 		imageFilePath := filepath.Join(dir, imageName)
-		imageFile, err := os.OpenFile(imageFilePath, os.O_RDONLY, fileInfo.Mode().Perm())
+		imageFile, err := os.OpenFile(imageFilePath, os.O_RDONLY, 0)
 		if err != nil {
 			return nil, err
 		}
