@@ -29,6 +29,8 @@ func main() {
 			switch format {
 			case "yaml":
 				formatter = internal.Yaml
+			case "toml":
+				formatter = internal.Toml
 			case "json":
 				formatter = internal.Json
 			default:

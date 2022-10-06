@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 
+	"github.com/pelletier/go-toml/v2"
 	"gopkg.in/yaml.v3"
 )
 
@@ -19,6 +20,14 @@ func Yaml(scanResult *ScanResult) (string, error) {
 	}
 	encoder.Close()
 	return buffer.String(), nil
+}
+
+func Toml(scanResult *ScanResult) (string, error) {
+	toml, err := toml.Marshal(scanResult)
+	if err != nil {
+		return "", err
+	}
+	return string(toml), nil
 }
 
 func Json(scanResult *ScanResult) (string, error) {

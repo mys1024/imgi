@@ -16,14 +16,14 @@ import (
 )
 
 type ScanResult struct {
-	Dir    string       `json:"dir"`
-	Images []*ImageInfo `json:"images"`
+	Dir    string       `json:"dir" toml:"dir"`
+	Images []*ImageInfo `json:"images" toml:"images"`
 }
 
 type ImageInfo struct {
-	Name   string `json:"name"`
-	Width  int    `json:"width"`
-	Height int    `json:"height"`
+	Name   string `json:"name" toml:"name"`
+	Width  int    `json:"width" toml:"width"`
+	Height int    `json:"height" toml:"height"`
 }
 
 func isImageFileName(fileName string) bool {
