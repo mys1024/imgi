@@ -5,15 +5,12 @@ A CLI tool that prints images' information.
 ## Usage
 
 ```bash
-imgi [DIR]
+imgi [DIR] # DIR: directory containing image files (default: "./")
 ```
 
-`DIR`: Directory containing image files (default: "./")
-
-**imgi** prints images' information in **YAML** format:
+`imgi` will print images' information like this:
 
 ```txt
-dir: /root
 images:
   - name: 1.jpg
     width: 2160
@@ -28,7 +25,13 @@ images:
 
 ## Flags
 
-- --format, -f: output format, available value: "yaml", "toml", "json" (default: "yaml")
+- --format value, -f value
+
+  set output format, available value: "yaml", "toml", "json" (default: "yaml")
+
+- --copy, -c
+
+  copy output to clipboard (default: false)
 
 ## Supported image formats
 
@@ -45,3 +48,7 @@ images:
 ```bash
 go install github.com/mys1024/imgi@latest
 ```
+
+## License
+
+MIT
