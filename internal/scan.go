@@ -15,7 +15,6 @@ import (
 )
 
 type ScanResult struct {
-	Dir    string       `json:"dir" toml:"dir"`
 	Images []*ImageInfo `json:"images" toml:"images"`
 }
 
@@ -71,7 +70,6 @@ func Scan(dir string) (*ScanResult, error) {
 	}
 
 	res := &ScanResult{
-		Dir:    dir,
 		Images: images,
 	}
 
