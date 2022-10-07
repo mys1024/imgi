@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/mys1024/imgi/internal"
+	"github.com/mys1024/imgi/v2/internal"
 
 	"github.com/urfave/cli/v2"
 	"golang.design/x/clipboard"

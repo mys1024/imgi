@@ -1,4 +1,4 @@
-module github.com/mys1024/imgi
+module github.com/mys1024/imgi/v2
 
 go 1.18
 
