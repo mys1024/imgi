@@ -37,7 +37,7 @@ func main() {
 			} else if cCtx.NArg() >= 2 {
 				return fmt.Errorf(fmt.Sprintf("Expected 0-1 arguments, but got %v", cCtx.NArg()))
 			}
-			// scan
+			// scan specified dir
 			scanResult, err := internal.Scan(dir)
 			if err != nil {
 				return err
@@ -61,10 +61,6 @@ func main() {
 			}
 			// copy output to clipboard
 			if cCtx.Bool("copy") {
-				err = clipboard.Init()
-				if err != nil {
-					return err
-				}
 				clipboard.Write(clipboard.FmtText, []byte(output))
 			}
 			// print output
