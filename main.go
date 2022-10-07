@@ -8,6 +8,7 @@ import (
 	"github.com/mys1024/imgi/internal"
 
 	"github.com/urfave/cli/v2"
+	"golang.design/x/clipboard"
 )
 
 func main() {
@@ -21,21 +22,14 @@ func main() {
 				Usage:   "output format, available value: \"yaml\", \"toml\", \"json\"",
 				Aliases: []string{"f"},
 			},
+			&cli.BoolFlag{
+				Name:    "copy",
+				Value:   false,
+				Usage:   "copy output to clipboard",
+				Aliases: []string{"c"},
+			},
 		},
 		Action: func(cCtx *cli.Context) error {
-			// flags
-			format := cCtx.String("format")
-			formatter := internal.Yaml
-			switch format {
-			case "yaml":
-				formatter = internal.Yaml
-			case "toml":
-				formatter = internal.Toml
-			case "json":
-				formatter = internal.Json
-			default:
-				return fmt.Errorf(fmt.Sprintf("Wrong flag (format) value: %v", format))
-			}
 			// args
 			dir := "./"
 			if cCtx.NArg() == 1 {
@@ -48,11 +42,32 @@ func main() {
 			if err != nil {
 				return err
 			}
-			// output
+			// format output
+			format := cCtx.String("format")
+			formatter := internal.Yaml
+			switch format {
+			case "yaml":
+				formatter = internal.Yaml
+			case "toml":
+				formatter = internal.Toml
+			case "json":
+				formatter = internal.Json
+			default:
+				return fmt.Errorf(fmt.Sprintf("Wrong flag (format) value: %v", format))
+			}
 			output, err := formatter(scanResult)
 			if err != nil {
 				return err
 			}
+			// copy output to clipboard
+			if cCtx.Bool("copy") {
+				err = clipboard.Init()
+				if err != nil {
+					return err
+				}
+				clipboard.Write(clipboard.FmtText, []byte(output))
+			}
+			// print output
 			fmt.Println(output)
 			return nil
 		},
