@@ -46,7 +46,7 @@ images:
 ## Install from source code
 
 ```bash
-go install github.com/mys1024/imgi@latest
+go install github.com/mys1024/imgi/v2@latest
 ```
 
 ## License
